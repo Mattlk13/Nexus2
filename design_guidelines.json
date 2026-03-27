@@ -1,0 +1,167 @@
+{
+  "design_system": {
+    "identity": {
+      "name": "NEXUS",
+      "vibe": "Cyber-Renaissance",
+      "emotional_tone": "Electric, Limitless, Empowering, Mysterious",
+      "core_principle": "Fusion over Imitation"
+    },
+    "typography": {
+      "fonts": {
+        "primary": {
+          "name": "Rajdhani",
+          "type": "Display / Sans-Serif",
+          "usage": "Headings (h1-h6), Hero Text, Stats",
+          "weights": ["500", "600", "700"],
+          "cdn_import": "@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap');"
+        },
+        "secondary": {
+          "name": "Manrope",
+          "type": "Sans-Serif",
+          "usage": "Body text, UI elements, Buttons, Inputs",
+          "weights": ["400", "500", "600"],
+          "cdn_import": "@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap');"
+        }
+      },
+      "rules": {
+        "headings": "Tracking-tight, Leading-none, Uppercase for H5/H6 labels. Use font-rajdhani.",
+        "body": "Leading-relaxed, Tracking-normal. Use font-manrope.",
+        "hero_text": "text-5xl md:text-7xl lg:text-9xl font-bold tracking-tighter uppercase"
+      }
+    },
+    "colors": {
+      "theme": "dark",
+      "palette": {
+        "background": {
+          "default": "#050505",
+          "paper": "#0A0A0A",
+          "subtle": "#121212"
+        },
+        "primary": {
+          "main": "#00F0FF",
+          "hover": "#00C2CC",
+          "foreground": "#000000"
+        },
+        "secondary": {
+          "main": "#7000FF",
+          "hover": "#5A00CC",
+          "foreground": "#FFFFFF"
+        },
+        "accent": {
+          "green": "#39FF14",
+          "pink": "#FF00FF",
+          "yellow": "#FAFF00"
+        },
+        "text": {
+          "primary": "#FFFFFF",
+          "secondary": "#A1A1AA",
+          "muted": "#52525B"
+        },
+        "border": {
+          "default": "#27272A",
+          "active": "#3F3F46"
+        }
+      },
+      "gradients": {
+        "primary": "linear-gradient(135deg, #00F0FF 0%, #7000FF 100%)",
+        "glass": "linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%)",
+        "tracing_beam": "linear-gradient(90deg, transparent, #00F0FF, transparent)"
+      }
+    },
+    "visual_enhancers": {
+      "glassmorphism": {
+        "default": "bg-black/40 backdrop-blur-xl border border-white/10 shadow-2xl",
+        "heavy": "bg-black/60 backdrop-blur-2xl border border-white/10"
+      },
+      "borders": {
+        "tracing_beam": "A glowing gradient line that travels around the container edge. Use framer-motion for animation.",
+        "neon_glow": "box-shadow: 0 0 10px rgba(0, 240, 255, 0.5), 0 0 20px rgba(0, 240, 255, 0.3)"
+      },
+      "texture": {
+        "noise": "bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"
+      }
+    },
+    "layout": {
+      "spacing_scale": {
+        "container_padding": "p-6 md:p-12 lg:p-24",
+        "section_gap": "gap-12 md:gap-24 lg:gap-32"
+      },
+      "grid_systems": {
+        "marketing": {
+          "name": "Tetris Grid",
+          "classes": "grid grid-cols-1 md:grid-cols-12 gap-6",
+          "rules": "Mix col-span-4, col-span-8, and row-span-2. Never symmetric."
+        },
+        "dashboard": {
+          "name": "Bento Grid",
+          "classes": "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4",
+          "rules": "Dense packing. Use h-full to stretch items."
+        }
+      }
+    },
+    "components": {
+      "buttons": {
+        "primary": "bg-primary text-black font-bold uppercase tracking-wider hover:shadow-[0_0_20px_rgba(0,240,255,0.5)] transition-all duration-300 rounded-sm",
+        "secondary": "border border-white/20 hover:border-white/50 text-white bg-transparent backdrop-blur-sm transition-all duration-300 rounded-sm",
+        "ghost": "text-white/60 hover:text-white hover:bg-white/5 transition-colors rounded-sm"
+      },
+      "cards": {
+        "marketing": "group relative overflow-hidden bg-white/5 border border-white/10 hover:border-primary/50 transition-colors duration-500 rounded-xl",
+        "dashboard": "bg-[#0A0A0A] border border-white/5 rounded-lg p-6 hover:bg-[#0F0F0F] transition-colors"
+      },
+      "inputs": {
+        "default": "bg-black/20 border border-white/10 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 placeholder:text-white/20 text-white rounded-md h-12"
+      }
+    },
+    "image_urls": {
+      "hero": {
+        "url": "https://images.unsplash.com/photo-1745402152130-2aec1b45f4ad?q=80&w=2070&auto=format&fit=crop",
+        "alt": "Futuristic digital artist with neon body paint"
+      },
+      "music_studio": {
+        "url": "https://images.unsplash.com/photo-1720962158812-d16549f1e5a3?q=80&w=2070&auto=format&fit=crop",
+        "alt": "AI Music Studio Interface with Waveforms"
+      },
+      "marketplace_bg": {
+        "url": "https://images.unsplash.com/photo-1761354643350-3038efb50bbd?q=80&w=2070&auto=format&fit=crop",
+        "alt": "Neon City Skyline for Marketplace Background"
+      },
+      "creators": [
+        {
+          "url": "https://images.unsplash.com/photo-1691373757998-b6f215e92a93?q=80&w=1974&auto=format&fit=crop",
+          "alt": "Digital Artist Portrait Neon"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1588200618450-3a5b1d3b9aa5?q=80&w=1974&auto=format&fit=crop",
+          "alt": "Photographer Portrait"
+        }
+      ]
+    },
+    "motion": {
+      "libraries": ["framer-motion"],
+      "principles": {
+        "hover": "scale: 1.02, transition: { duration: 0.2 }",
+        "tap": "scale: 0.98",
+        "entrance": "opacity: 0, y: 20 -> opacity: 1, y: 0 (staggered)"
+      }
+    },
+    "instructions_to_main_agent": [
+      "1. SETUP: Install 'framer-motion', 'lucide-react', 'clsx', 'tailwind-merge'.",
+      "2. THEME: Update 'tailwind.config.js' to extend colors with the provided palette. Do NOT just rely on default shadcn variables. OVERRIDE them for the 'dark' theme.",
+      "3. FONTS: Import 'Rajdhani' and 'Manrope' in 'index.css' via Google Fonts.",
+      "4. LAYOUT: For the Landing Page, use the 'Tetris Grid' logic. Do not make it a boring list of sections. Overlap elements.",
+      "5. GLASSMORPHISM: Apply the 'glass' utility heavily on the Dashboard sidebar and top navigation.",
+      "6. IMAGES: Use the provided Unsplash URLs. Do NOT use placeholders.",
+      "7. GRADIENTS: Use gradients for BORDERS and TEXT, not for full backgrounds (keeps it clean).",
+      "8. DATA-TESTID: Add data-testid to all interactive elements (buttons, inputs, links)."
+    ],
+    "universal_guidelines": [
+      "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients.",
+      "Don't make generic centered layouts. Use asymmetry.",
+      "Create depth through layered design elements with z-index hierarchy.",
+      "Use glass-morphism effects with backdrop filters (12-24px blur).",
+      "NEVER use generic AI emojis.",
+      "Every interaction needs micro-animations."
+    ]
+  }
+}

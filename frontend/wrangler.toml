@@ -1,0 +1,6 @@
+name = "nexus-ai"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "build"
+
+[env.production]
+account_id = "9ea3a006589428efed0480da5c037163"

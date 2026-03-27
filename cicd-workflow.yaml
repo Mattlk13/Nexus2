@@ -1,0 +1,262 @@
+# NEXUS CI/CD Workflow Configuration
+# Defines automated workflows for all services
+
+version: "1.0"
+
+# Global settings
+settings:
+  parallel_execution: true
+  max_parallel_jobs: 10
+  timeout: 3600  # 1 hour
+  retry_on_failure: 2
+  notification_channels:
+    - slack
+    - email
+
+# Workflow definitions
+workflows:
+  
+  # === FULL DEPLOYMENT WORKFLOW ===
+  full_deploy:
+    name: "Full System Deployment"
+    trigger: manual
+    steps:
+      - name: "Build Core Hybrids"
+        services:
+          - llm
+          - media
+          - music
+          - agents
+          - mcp
+        parallel: true
+        
+      - name: "Build Infrastructure"
+        services:
+          - auth
+          - unified_storage
+          - r2
+          - seaweedfs
+        parallel: true
+        depends_on: []
+        
+      - name: "Build Business Services"
+        services:
+          - payments
+          - analytics
+          - investor_dashboard
+          - marketing_dashboard
+          - investor_discovery
+        parallel: true
+        depends_on: ["auth"]
+        
+      - name: "Build Ultimate Controller"
+        services:
+          - ultimate_controller
+        parallel: false
+        depends_on: ["llm", "media", "music", "agents"]
+        
+      - name: "Test All Services"
+        action: test
+        scope: all
+        parallel: true
+        
+      - name: "Deploy to Production"
+        action: deploy
+        scope: all
+        parallel: false
+
+  # === HYBRID SERVICES WORKFLOW ===
+  deploy_hybrids:
+    name: "Deploy Hybrid Services"
+    trigger: manual
+    services:
+      - llm
+      - media
+      - music
+      - agents
+      - payments
+      - analytics
+      - auth
+      - automation
+      - discovery
+      - mcp
+      - notifications
+      - comms
+      - ultimate_controller
+    steps:
+      - build
+      - test
+      - deploy
+
+  # === AI SERVICES WORKFLOW ===
+  deploy_ai:
+    name: "Deploy AI Services"
+    trigger: manual
+    services:
+      - llm
+      - media
+      - music
+      - agents
+      - ultra_llm
+      - ultra_image_video
+      - ultra_voice
+    steps:
+      - build
+      - test
+      - deploy
+
+  # === BUSINESS SERVICES WORKFLOW ===
+  deploy_business:
+    name: "Deploy Business Services"
+    trigger: manual
+    services:
+      - payments
+      - analytics
+      - investor_dashboard
+      - marketing_dashboard
+      - investor_discovery
+    steps:
+      - build
+      - test
+      - deploy
+
+  # === STORAGE WORKFLOW ===
+  deploy_storage:
+    name: "Deploy Storage Services"
+    trigger: manual
+    services:
+      - unified_storage
+      - r2
+      - seaweedfs
+    steps:
+      - build
+      - test
+      - deploy
+
+  # === TESTING WORKFLOW ===
+  test_all:
+    name: "Test All Services"
+    trigger: 
+      - push
+      - pull_request
+    steps:
+      - name: "Unit Tests"
+        action: test
+        scope: all
+        parallel: true
+        
+      - name: "Integration Tests"
+        action: integration_test
+        scope: critical
+        parallel: false
+        
+      - name: "E2E Tests"
+        action: e2e_test
+        scope: user_flows
+        parallel: false
+
+  # === HOT FIX WORKFLOW ===
+  hotfix:
+    name: "Deploy Hot Fix"
+    trigger: manual
+    priority: urgent
+    steps:
+      - name: "Build Changed Services"
+        action: build
+        scope: changed
+        
+      - name: "Quick Test"
+        action: test
+        scope: changed
+        
+      - name: "Deploy with Rollback"
+        action: deploy
+        scope: changed
+        rollback_on_failure: true
+
+  # === MONITORING WORKFLOW ===
+  health_check:
+    name: "Service Health Check"
+    trigger: schedule
+    schedule: "*/5 * * * *"  # Every 5 minutes
+    steps:
+      - name: "Check All Services"
+        action: health_check
+        scope: running
+        
+      - name: "Alert on Failures"
+        action: alert
+        condition: health_failed
+
+  # === DAILY AUTOMATION ===
+  daily_tasks:
+    name: "Daily Automated Tasks"
+    trigger: schedule
+    schedule: "0 2 * * *"  # 2 AM UTC
+    services:
+      - daily_automation
+      - automated_testing
+      - analytics
+    steps:
+      - name: "Run Daily Automation"
+        action: execute
+        
+      - name: "Generate Reports"
+        action: report
+        
+      - name: "Backup Data"
+        action: backup
+
+# Service Categories
+categories:
+  critical:
+    - ultimate_controller
+    - llm
+    - auth
+    - unified_storage
+    
+  high_priority:
+    - media
+    - music
+    - payments
+    - mcp
+    
+  medium_priority:
+    - analytics
+    - automation
+    - discovery
+    - investor_dashboard
+    
+  low_priority:
+    - marketing_dashboard
+    - social_media
+    - email
+
+# Deployment Environments
+environments:
+  development:
+    auto_deploy: true
+    require_approval: false
+    
+  staging:
+    auto_deploy: false
+    require_approval: true
+    
+  production:
+    auto_deploy: false
+    require_approval: true
+    require_tests: true
+    rollback_enabled: true
+
+# Notification Rules
+notifications:
+  on_success:
+    - type: slack
+      channel: "#deployments"
+      
+  on_failure:
+    - type: slack
+      channel: "#alerts"
+      urgent: true
+    - type: email
+      recipients: ["admin@nexus.ai"]
