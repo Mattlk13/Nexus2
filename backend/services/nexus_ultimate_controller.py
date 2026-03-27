@@ -65,6 +65,16 @@ class UltimateMasterController:
         from services.nexus_hybrid_js_state import hybrid_js_state
         from services.nexus_hybrid_omma import hybrid_omma
         
+        # Wave 4: 2026 Cutting-Edge AI Integrations
+        from services.nexus_hybrid_sora_video import hybrid_sora_video
+        from services.nexus_hybrid_gpt_image import hybrid_gpt_image
+        from services.nexus_hybrid_groq import hybrid_groq
+        from services.nexus_hybrid_crewai import hybrid_crewai
+        from services.nexus_hybrid_langgraph import hybrid_langgraph
+        from services.nexus_hybrid_autogen import hybrid_autogen
+        from services.nexus_hybrid_openclaw import hybrid_openclaw
+        from services.nexus_hybrid_elevenlabs import hybrid_elevenlabs
+        
         self.hybrids = {
             # Core AI & Integration Hybrids
             "llm": {"service": hybrid_llm, "status": "active", "category": "ai"},
@@ -95,6 +105,16 @@ class UltimateMasterController:
             "php_quality": {"service": hybrid_php_quality, "status": "active", "category": "development"},
             "js_state": {"service": hybrid_js_state, "status": "active", "category": "frontend"},
             "omma": {"service": hybrid_omma, "status": "active", "category": "ai"},
+            
+            # Wave 4: 2026 Cutting-Edge AI (Tier 1 & 2)
+            "sora_video": {"service": hybrid_sora_video, "status": "active", "category": "ai_video"},
+            "gpt_image": {"service": hybrid_gpt_image, "status": "active", "category": "ai_image"},
+            "groq": {"service": hybrid_groq, "status": "active", "category": "ai_inference"},
+            "crewai": {"service": hybrid_crewai, "status": "active", "category": "ai_agents"},
+            "langgraph": {"service": hybrid_langgraph, "status": "active", "category": "ai_agents"},
+            "autogen": {"service": hybrid_autogen, "status": "active", "category": "ai_agents"},
+            "openclaw": {"service": hybrid_openclaw, "status": "active", "category": "ai_agents"},
+            "elevenlabs": {"service": hybrid_elevenlabs, "status": "active", "category": "ai_voice"},
             
             # Business & Operations
             "payments": {"service": hybrid_payments, "status": "active", "category": "business"},
