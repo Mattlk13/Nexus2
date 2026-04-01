@@ -866,6 +866,7 @@ import AgentWorkspace from "./pages/AgentWorkspace";
 import OmmaVideoGenerator from "./pages/OmmaVideoGenerator";
 import AutonomousDashboard from "./pages/AutonomousDashboard";
 import EnterpriseAI from "./pages/EnterpriseAI";
+import CloudflareAdmin from "./pages/CloudflareAdmin";
 
 // ==================== MAIN APP ====================
 
@@ -936,6 +937,7 @@ function App() {
               <Route path="/omma-video" element={<OmmaVideoGenerator />} />
               <Route path="/autonomous" element={<AutonomousDashboard />} />
               <Route path="/enterprise-ai" element={<EnterpriseAI />} />
+              <Route path="/admin/cloudflare" element={<CloudflareAdmin />} />
             </Routes>
             <MessengerPopup />
             <AIChatWidget />
