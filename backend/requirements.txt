@@ -10,6 +10,7 @@ anyio==4.12.1
 appdirs==1.4.4
 async-timeout==5.0.1
 attrs==25.4.0
+Authlib==1.6.9
 autogen-agentchat==0.7.5
 autogen-core==0.7.5
 backoff==2.2.1
@@ -37,6 +38,7 @@ diskcache==5.6.3
 distro==1.9.0
 dnspython==2.8.0
 docstring_parser==0.17.0
+dparse==0.6.4
 durationpy==0.10
 ecdsa==0.19.1
 elevenlabs==2.39.0
@@ -90,6 +92,7 @@ isort==8.0.0
 Jinja2==3.1.6
 jiter==0.11.1
 jmespath==1.1.0
+joblib==1.5.3
 jq==1.11.0
 json5==0.13.0
 json_repair==0.25.2
@@ -112,6 +115,7 @@ librt==0.8.1
 litellm==1.80.0
 markdown-it-py==4.0.0
 MarkupSafe==3.0.3
+marshmallow==4.2.3
 matplotlib==3.10.8
 matrix-nio==0.25.2
 mccabe==0.7.0
@@ -125,6 +129,7 @@ multidict==6.7.1
 mypy==1.19.1
 mypy_extensions==1.1.0
 networkx==3.6.1
+nltk==3.9.4
 numpy==2.4.2
 nvidia-cublas==13.1.0.3
 nvidia-cuda-cupti==13.0.85
@@ -215,10 +220,13 @@ resend==2.26.0
 rich==14.3.3
 rpds-py==0.30.0
 rsa==4.9.1
+ruamel.yaml==0.19.1
 runwayml==4.8.0
 s3transfer==0.16.0
 s5cmd==0.2.0
 safehttpx==0.1.7
+safety==3.7.0
+safety-schemas==0.0.16
 scipy==1.17.1
 semantic-version==2.10.0
 shellingham==1.5.4

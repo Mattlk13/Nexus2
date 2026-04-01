@@ -1,0 +1,71 @@
+name: Deploy NEXUS to Production
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Install dependencies
+        run: |
+          cd frontend
+          yarn install
+          
+      - name: Build
+        run: |
+          cd frontend
+          yarn build
+          
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: nexus-ai-social
+          directory: frontend/build
+          
+  deploy-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          
+      - name: Install dependencies
+        run: |
+          cd backend
+          pip install -r requirements.txt
+          
+      - name: Deploy to Railway
+        run: |
+          npm install -g @railway/cli
+          cd backend
+          railway up
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          
+  health-check:
+    needs: [deploy-frontend, deploy-backend]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Frontend
+        run: curl -f https://nexus-ai-social.pages.dev || exit 1
+        
+      - name: Check Backend Health
+        run: curl -f ${{ secrets.BACKEND_URL }}/api/health || exit 1
+        
+      - name: Notify Success
+        run: echo "✅ Deployment successful!"
