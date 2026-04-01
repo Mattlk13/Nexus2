@@ -244,16 +244,11 @@ tokenizers==0.22.2
 tomli==2.4.0
 tomli_w==1.2.0
 tomlkit==0.13.3
-torch==2.11.0
-torchvision==0.26.0
 tqdm==4.67.3
-triton==3.6.0
 typer==0.24.1
 typing-inspection==0.4.2
 typing_extensions==4.15.0
 tzdata==2025.3
-ultralytics==8.4.26
-ultralytics-thop==2.0.18
 unpaddedbase64==2.1.0
 uritemplate==4.2.0
 urllib3==2.6.3
@@ -269,6 +264,6 @@ xxhash==3.6.0
 yarl==1.23.0
 zipp==3.23.0
 zstandard==0.25.0
-gradient-sdk>=1.0.0
+gradient-sdk==0.0.4
 langgraph>=1.1.0
 langchain-core>=1.2.0

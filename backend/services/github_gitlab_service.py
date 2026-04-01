@@ -47,10 +47,10 @@ class GitHubGitLabIntegrationService:
         # Get origin dynamically from environment
         if not origin:
             # Get the frontend URL from environment (without /api suffix)
-            frontend_url = os.environ.get('REACT_APP_BACKEND_URL', '').replace('/api', '')
+            frontend_url = os.environ.get('FRONTEND_URL') or os.environ.get('REACT_APP_BACKEND_URL', '').replace('/api', '')
             if not frontend_url or frontend_url == 'https://yourdomain.com':
-                # Fallback: construct from current deployment
-                frontend_url = "https://model-exchange-2.preview.emergentagent.com"
+                # For OAuth to work, FRONTEND_URL must be configured
+                raise ValueError("FRONTEND_URL environment variable must be set for OAuth authentication. Please configure it in your .env file.")
             origin = frontend_url
         
         state = self.generate_oauth_state()
