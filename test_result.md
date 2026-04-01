@@ -1,4 +1,75 @@
 # ========================
+# v6.1 Testing Requirements - Autonomous + Enterprise AI + Mistral TTS
+# ========================
+
+## What Changed in v6.1
+
+### 🎙️ MISTRAL VOXTRAL TTS (NEW):
+1. **Mistral Voxtral TTS Service** (nexus_hybrid_mistral_tts.py) - NEW
+   - Open-weight text-to-speech model that beats ElevenLabs
+   - 3.4B parameters (3GB RAM), runs on laptop/smartphone
+   - 90ms time-to-first-audio, 6x real-time generation speed
+   - 9 languages: English, French, German, Spanish, Dutch, Portuguese, Italian, Hindi, Arabic
+   - 5-second voice cloning with zero-shot cross-lingual adaptation
+   - 62.8% preference over ElevenLabs Flash on flagship voices
+   - 69.9% preference on voice customization tasks
+   - Endpoints:
+     - POST /generate - Generate speech from text
+     - POST /voice/custom - Create custom voice (5 sec audio)
+     - POST /voice/cross-lingual - Cross-lingual voice cloning
+     - GET /benchmarks - Performance vs ElevenLabs
+     - GET /history - Generation history
+     - GET /voices - List custom + flagship voices
+
+### 📊 PLATFORM STATUS:
+- **Total Hybrids**: 47 → **48** (Mistral TTS added)
+- Bug fixed: CRM contact creation MongoDB ObjectId serialization (line 168 in enterprise_slack.py)
+- All services auto-loaded via dynamic router at `/api/v2/hybrid`
+
+### Files Modified/Created:
+Backend:
+- /app/backend/services/nexus_hybrid_mistral_tts.py (NEW - 320 lines)
+- /app/backend/services/nexus_hybrid_enterprise_slack.py (BUG FIX - added pop("_id"))
+
+---
+
+## Test Priority
+
+P0 (Critical - Must Work):
+1. ✅ Mistral TTS capabilities endpoint
+2. ✅ Mistral TTS generate speech (all 9 languages)
+3. ✅ Mistral TTS custom voice creation
+4. ✅ Mistral TTS cross-lingual voice cloning
+5. ✅ Mistral TTS benchmarks endpoint
+6. ✅ CRM contact creation (bug fixed)
+7. All v6.0 autonomous + enterprise features still working
+
+## Testing Notes
+- Mistral TTS released March 26, 2026 by Mistral AI
+- Claims to beat ElevenLabs with open weights for enterprise control
+- Article source: VentureBeat
+- All previous v6.0 tests should pass
+
+metadata:
+  created_by: "main_agent"
+  version: "6.1"
+  test_sequence: 18
+  run_ui: true
+
+test_plan:
+  current_focus:
+    - "Mistral Voxtral TTS 6 endpoints"
+    - "CRM bug fix verification"
+    - "48 hybrid services via dynamic router"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+    - agent: "main"
+      message: "v6.1 Mistral Voxtral TTS integrated. Created open-weight TTS service with 9 languages, 5-sec voice cloning, zero-shot cross-lingual adaptation, and benchmarks showing 62.8-69.9% preference over ElevenLabs. Fixed CRM bug (MongoDB ObjectId serialization). Platform now at 48 hybrid services. Ready for comprehensive testing."
+
+# ========================
 # v6.0 Testing Requirements - Autonomous Mode + Enterprise AI
 # ========================
 
