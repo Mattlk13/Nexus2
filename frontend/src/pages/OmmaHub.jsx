@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useQuery, useMutation } from '@tantml:query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { 
   Sparkles, Code, Box, Image, Video, Zap, Users, 
