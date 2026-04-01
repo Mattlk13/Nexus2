@@ -10,3 +10,7 @@ node_modules/
 dist/
 build/
 .secrets/
+-e 
+# Environment files
+*.env
+*.env.*
