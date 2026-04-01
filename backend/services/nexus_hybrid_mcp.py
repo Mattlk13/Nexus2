@@ -450,3 +450,21 @@ class HybridMCPEngine:
 
 # Global instance
 hybrid_mcp = HybridMCPEngine()
+
+# Route registration for dynamic loading
+def register_routes(db, get_current_user, require_admin):
+    """Register Mcp routes"""
+    from fastapi import APIRouter
+    router = APIRouter(tags=["Mcp Hybrid"])
+    
+    @router.get("/capabilities")
+    async def get_capabilities():
+        """Get Mcp capabilities"""
+        if hasattr(hybrid_mcp, 'get_capabilities'):
+            return hybrid_mcp.get_capabilities()
+        return {"status": "active", "name": "Mcp"}
+    
+    return router
+
+def init_hybrid(db):
+    return hybrid_mcp

@@ -304,3 +304,21 @@ Provide:
 
 # Global instance
 hybrid_agents = HybridAgentsOrchestrator()
+
+# Route registration for dynamic loading
+def register_routes(db, get_current_user, require_admin):
+    """Register Agents routes"""
+    from fastapi import APIRouter
+    router = APIRouter(tags=["Agents Hybrid"])
+    
+    @router.get("/capabilities")
+    async def get_capabilities():
+        """Get Agents capabilities"""
+        if hasattr(hybrid_agents, 'get_capabilities'):
+            return hybrid_agents.get_capabilities()
+        return {"status": "active", "name": "Agents"}
+    
+    return router
+
+def init_hybrid(db):
+    return hybrid_agents

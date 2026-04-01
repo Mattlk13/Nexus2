@@ -152,3 +152,21 @@ class HybridDiscoveryPlatform:
         }
 
 hybrid_discovery = HybridDiscoveryPlatform()
+
+# Route registration for dynamic loading
+def register_routes(db, get_current_user, require_admin):
+    """Register Discovery routes"""
+    from fastapi import APIRouter
+    router = APIRouter(tags=["Discovery Hybrid"])
+    
+    @router.get("/capabilities")
+    async def get_capabilities():
+        """Get Discovery capabilities"""
+        if hasattr(hybrid_discovery, 'get_capabilities'):
+            return hybrid_discovery.get_capabilities()
+        return {"status": "active", "name": "Discovery"}
+    
+    return router
+
+def init_hybrid(db):
+    return hybrid_discovery

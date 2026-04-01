@@ -140,3 +140,21 @@ class HybridAnalyticsHub:
         }
 
 hybrid_analytics = HybridAnalyticsHub()
+
+# Route registration for dynamic loading
+def register_routes(db, get_current_user, require_admin):
+    """Register Analytics routes"""
+    from fastapi import APIRouter
+    router = APIRouter(tags=["Analytics Hybrid"])
+    
+    @router.get("/capabilities")
+    async def get_capabilities():
+        """Get Analytics capabilities"""
+        if hasattr(hybrid_analytics, 'get_capabilities'):
+            return hybrid_analytics.get_capabilities()
+        return {"status": "active", "name": "Analytics"}
+    
+    return router
+
+def init_hybrid(db):
+    return hybrid_analytics

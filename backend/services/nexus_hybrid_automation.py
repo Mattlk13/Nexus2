@@ -134,3 +134,21 @@ class HybridAutomationEngine:
         }
 
 hybrid_automation = HybridAutomationEngine()
+
+# Route registration for dynamic loading
+def register_routes(db, get_current_user, require_admin):
+    """Register Automation routes"""
+    from fastapi import APIRouter
+    router = APIRouter(tags=["Automation Hybrid"])
+    
+    @router.get("/capabilities")
+    async def get_capabilities():
+        """Get Automation capabilities"""
+        if hasattr(hybrid_automation, 'get_capabilities'):
+            return hybrid_automation.get_capabilities()
+        return {"status": "active", "name": "Automation"}
+    
+    return router
+
+def init_hybrid(db):
+    return hybrid_automation

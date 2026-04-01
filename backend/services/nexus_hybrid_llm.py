@@ -189,3 +189,21 @@ class HybridLLMService:
 
 # Global instance
 hybrid_llm = HybridLLMService()
+
+# Route registration for dynamic loading
+def register_routes(db, get_current_user, require_admin):
+    """Register Llm routes"""
+    from fastapi import APIRouter
+    router = APIRouter(tags=["Llm Hybrid"])
+    
+    @router.get("/capabilities")
+    async def get_capabilities():
+        """Get Llm capabilities"""
+        if hasattr(hybrid_llm, 'get_capabilities'):
+            return hybrid_llm.get_capabilities()
+        return {"status": "active", "name": "Llm"}
+    
+    return router
+
+def init_hybrid(db):
+    return hybrid_llm

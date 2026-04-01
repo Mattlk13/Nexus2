@@ -151,3 +151,21 @@ class HybridCommunicationsPlatform:
         }
 
 hybrid_comms = HybridCommunicationsPlatform()
+
+# Route registration for dynamic loading
+def register_routes(db, get_current_user, require_admin):
+    """Register Comms routes"""
+    from fastapi import APIRouter
+    router = APIRouter(tags=["Comms Hybrid"])
+    
+    @router.get("/capabilities")
+    async def get_capabilities():
+        """Get Comms capabilities"""
+        if hasattr(hybrid_comms, 'get_capabilities'):
+            return hybrid_comms.get_capabilities()
+        return {"status": "active", "name": "Comms"}
+    
+    return router
+
+def init_hybrid(db):
+    return hybrid_comms

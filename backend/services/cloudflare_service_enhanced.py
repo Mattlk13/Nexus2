@@ -106,3 +106,116 @@ class CloudflareService:
 
 # Global instance
 cloudflare_service = CloudflareService()
+
+
+    async def kv_write(self, namespace_id: str, key: str, value: str) -> Dict:
+        """Write to Cloudflare KV"""
+        try:
+            if not self.api_token:
+                return {"success": False, "error": "Cloudflare API token not configured"}
+            
+            import aiohttp
+            async with aiohttp.ClientSession() as session:
+                headers = {"Authorization": f"Bearer {self.api_token}"}
+                url = f"https://api.cloudflare.com/client/v4/accounts/{self.account_id}/storage/kv/namespaces/{namespace_id}/values/{key}"
+                
+                async with session.put(url, headers=headers, data=value.encode()) as resp:
+                    if resp.status == 200:
+                        return {"success": True, "key": key}
+                    else:
+                        error = await resp.text()
+                        return {"success": False, "error": error}
+        except Exception as e:
+            logger.error(f"KV write error: {e}")
+            return {"success": False, "error": str(e)}
+    
+    async def kv_read(self, namespace_id: str, key: str) -> Dict:
+        """Read from Cloudflare KV"""
+        try:
+            if not self.api_token:
+                return {"success": False, "error": "Cloudflare API token not configured"}
+            
+            import aiohttp
+            async with aiohttp.ClientSession() as session:
+                headers = {"Authorization": f"Bearer {self.api_token}"}
+                url = f"https://api.cloudflare.com/client/v4/accounts/{self.account_id}/storage/kv/namespaces/{namespace_id}/values/{key}"
+                
+                async with session.get(url, headers=headers) as resp:
+                    if resp.status == 200:
+                        value = await resp.text()
+                        return {"success": True, "key": key, "value": value}
+                    elif resp.status == 404:
+                        return {"success": False, "error": "Key not found"}
+                    else:
+                        error = await resp.text()
+                        return {"success": False, "error": error}
+        except Exception as e:
+            logger.error(f"KV read error: {e}")
+            return {"success": False, "error": str(e)}
+    
+    async def deploy_worker(self, name: str, script: str) -> Dict:
+        """Deploy Cloudflare Worker"""
+        try:
+            if not self.api_token:
+                return {"success": False, "error": "Cloudflare API token not configured"}
+            
+            import aiohttp
+            async with aiohttp.ClientSession() as session:
+                headers = {
+                    "Authorization": f"Bearer {self.api_token}",
+                    "Content-Type": "application/javascript"
+                }
+                url = f"https://api.cloudflare.com/client/v4/accounts/{self.account_id}/workers/scripts/{name}"
+                
+                async with session.put(url, headers=headers, data=script.encode()) as resp:
+                    result = await resp.json()
+                    if result.get("success"):
+                        return {
+                            "success": True,
+                            "worker_name": name,
+                            "url": f"https://{name}.{self.account_id}.workers.dev"
+                        }
+                    else:
+                        return {"success": False, "error": result.get("errors", ["Unknown error"])}
+        except Exception as e:
+            logger.error(f"Worker deployment error: {e}")
+            return {"success": False, "error": str(e)}
+
+# Global instance
+cloudflare_service = CloudflareService()
+
+# Route registration for dynamic loading
+def register_routes(db, get_current_user, require_admin):
+    """Register Cloudflare routes"""
+    from fastapi import APIRouter
+    router = APIRouter(tags=["Cloudflare"])
+    
+    @router.get("/capabilities")
+    async def get_capabilities():
+        """Get Cloudflare capabilities"""
+        return cloudflare_service.get_capabilities()
+    
+    @router.get("/status")
+    async def get_status():
+        """Get Cloudflare service status"""
+        return cloudflare_service.get_status()
+    
+    @router.post("/kv/write")
+    async def write_kv(namespace_id: str, key: str, value: str):
+        """Write to KV storage"""
+        return await cloudflare_service.kv_write(namespace_id, key, value)
+    
+    @router.get("/kv/read")
+    async def read_kv(namespace_id: str, key: str):
+        """Read from KV storage"""
+        return await cloudflare_service.kv_read(namespace_id, key)
+    
+    @router.post("/worker/deploy")
+    async def deploy_worker(name: str, script: str):
+        """Deploy Worker"""
+        return await cloudflare_service.deploy_worker(name, script)
+    
+    return router
+
+def init_hybrid(db):
+    return cloudflare_service

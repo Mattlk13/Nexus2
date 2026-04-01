@@ -236,3 +236,21 @@ class HybridAuthService:
 
 # Global instance
 hybrid_auth = HybridAuthService()
+
+# Route registration for dynamic loading
+def register_routes(db, get_current_user, require_admin):
+    """Register Auth routes"""
+    from fastapi import APIRouter
+    router = APIRouter(tags=["Auth Hybrid"])
+    
+    @router.get("/capabilities")
+    async def get_capabilities():
+        """Get Auth capabilities"""
+        if hasattr(hybrid_auth, 'get_capabilities'):
+            return hybrid_auth.get_capabilities()
+        return {"status": "active", "name": "Auth"}
+    
+    return router
+
+def init_hybrid(db):
+    return hybrid_auth
