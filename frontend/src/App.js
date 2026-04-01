@@ -863,6 +863,7 @@ import AgentStudio from "./pages/AgentStudio";
 import UniversalAssistant from "./pages/UniversalAssistant";
 import AgentWorkspace from "./pages/AgentWorkspace";
 import OmmaVideoGenerator from "./pages/OmmaVideoGenerator";
+import AutonomousDashboard from "./pages/AutonomousDashboard";
 
 // ==================== MAIN APP ====================
 
@@ -931,6 +932,7 @@ function App() {
               <Route path="/universal-assistant" element={<UniversalAssistant />} />
               <Route path="/agent-workspace" element={<AgentWorkspace />} />
               <Route path="/omma-video" element={<OmmaVideoGenerator />} />
+              <Route path="/autonomous" element={<AutonomousDashboard />} />
             </Routes>
             <MessengerPopup />
             <AIChatWidget />
