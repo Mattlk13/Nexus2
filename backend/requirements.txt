@@ -269,3 +269,6 @@ xxhash==3.6.0
 yarl==1.23.0
 zipp==3.23.0
 zstandard==0.25.0
+gradient-sdk>=1.0.0
+langgraph>=1.1.0
+langchain-core>=1.2.0

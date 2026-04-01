@@ -856,6 +856,7 @@ import Marketplace from "./pages/Marketplace";
 import Messages from "./pages/Messages";
 import Profile from "./pages/Profile";
 import AdminDashboardNew from "./pages/AdminDashboard";
+import AgentStudio from "./pages/AgentStudio";
 
 // ==================== MAIN APP ====================
 
@@ -920,6 +921,7 @@ function App() {
               <Route path="/messages" element={<Messages />} />
               <Route path="/profile-new" element={<Profile />} />
               <Route path="/admin-dashboard" element={<AdminDashboardNew />} />
+              <Route path="/agent-studio" element={<AgentStudio />} />
             </Routes>
             <MessengerPopup />
             <AIChatWidget />
