@@ -373,3 +373,46 @@ class HybridMusicEngine:
 
 # Global instance
 hybrid_music = HybridMusicEngine()
+
+
+# Route registration for dynamic loading
+def register_routes(db, get_current_user, require_admin):
+    """Register music hybrid routes"""
+    from fastapi import APIRouter
+    router = APIRouter(tags=["Music Hybrid"])
+    
+    @router.get("/capabilities")
+    async def get_capabilities():
+        """Get music engine capabilities"""
+        return hybrid_music.get_capabilities()
+    
+    @router.post("/generate")
+    async def generate_music(request: dict):
+        """Generate AI music"""
+        prompt = request.get("prompt", "")
+        style = request.get("style", "general")
+        duration = request.get("duration", 30)
+        return await hybrid_music.generate_music(prompt, style, duration)
+    
+    @router.post("/metadata")
+    async def generate_metadata(request: dict):
+        """Generate metadata for music file"""
+        audio_data = request.get("audio_data")
+        return await hybrid_music.generate_metadata(audio_data)
+    
+    @router.get("/formats")
+    async def get_formats():
+        """Get supported audio formats"""
+        return {
+            "supported_formats": hybrid_music.supported_formats,
+            "total": len(hybrid_music.supported_formats)
+        }
+    
+    return router
+
+# Keep backward compatibility
+def create_music_engine():
+    return hybrid_music
+
+def init_hybrid(db):
+    return hybrid_music
