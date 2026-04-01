@@ -44,6 +44,8 @@ from services.text_to_video_service import text_to_video_service
 from services.runway_video_service import runway_video_service
 from services.social_media_service import social_media_service
 from services.redis_cache_service import cache_service, cached
+from services.websocket_service import manager, handle_websocket_message
+from routes.social_routes import create_social_routes
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -3206,6 +3208,23 @@ fastapi_app.include_router(get_creation_studio_router(db), prefix="/api")
 fastapi_app.include_router(get_social_automation_router(), prefix="/api")
 fastapi_app.include_router(get_oauth_router(db), prefix="/api")
 fastapi_app.include_router(get_upload_router(db), prefix="/api")
+
+# NEXUS Social Network Routes
+social_router = create_social_routes(db, get_current_user)
+fastapi_app.include_router(social_router)
+
+# WebSocket endpoint for real-time features
+from fastapi import WebSocket
+@fastapi_app.websocket("/api/ws/{user_id}")
+async def websocket_endpoint(websocket: WebSocket, user_id: str):
+    """WebSocket endpoint for real-time chat, notifications, and live updates"""
+    await manager.connect(websocket, user_id)
+    try:
+        await handle_websocket_message(websocket, user_id, db)
+    except Exception as e:
+        logger.error(f"WebSocket error for user {user_id}: {e}")
+        manager.disconnect(websocket, user_id)
+
 
 # Start master automation on startup
 @fastapi_app.on_event("startup")
