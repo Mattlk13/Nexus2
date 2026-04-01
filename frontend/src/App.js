@@ -852,6 +852,7 @@ import PHPQualityHub from "./pages/PHPQualityHub";
 import AllHybridsShowcase from "./pages/AllHybridsShowcase";
 import OmmaHub from "./pages/OmmaHub";
 import SocialNetwork from "./pages/SocialNetwork";
+import Marketplace from "./pages/Marketplace";
 
 // ==================== MAIN APP ====================
 
@@ -911,6 +912,8 @@ function App() {
               <Route path="/all-hybrids" element={<AllHybridsShowcase />} />
               <Route path="/omma" element={<OmmaHub />} />
               <Route path="/social" element={<SocialNetwork />} />
+              <Route path="/studio" element={<CreationStudio />} />
+              <Route path="/marketplace" element={<Marketplace />} />
             </Routes>
             <MessengerPopup />
             <AIChatWidget />
