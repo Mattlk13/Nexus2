@@ -114,6 +114,7 @@ const Navbar = () => {
     { path: "/spotlight", label: "Spotlight", icon: Star },
     { path: "/discovery-hub", label: "Discovery", icon: TrendingUp },
     { path: "/agents", label: "AI Agents", icon: Bot },
+    { path: "/universal-assistant", label: "Universal AI", icon: Sparkles },
   ];
 
   return (
@@ -858,6 +859,7 @@ import Messages from "./pages/Messages";
 import Profile from "./pages/Profile";
 import AdminDashboardNew from "./pages/AdminDashboard";
 import AgentStudio from "./pages/AgentStudio";
+import UniversalAssistant from "./pages/UniversalAssistant";
 
 // ==================== MAIN APP ====================
 
@@ -923,6 +925,7 @@ function App() {
               <Route path="/profile-new" element={<Profile />} />
               <Route path="/admin-dashboard" element={<AdminDashboardNew />} />
               <Route path="/agent-studio" element={<AgentStudio />} />
+              <Route path="/universal-assistant" element={<UniversalAssistant />} />
             </Routes>
             <MessengerPopup />
             <AIChatWidget />

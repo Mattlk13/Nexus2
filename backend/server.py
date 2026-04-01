@@ -47,6 +47,7 @@ from services.redis_cache_service import cache_service, cached
 from services.websocket_service import manager, handle_websocket_message
 from routes.social_routes import create_social_routes
 from routes.adk_routes import router as adk_router
+from routes.universal_routes import create_universal_routes
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -3210,6 +3211,10 @@ fastapi_app.include_router(get_social_automation_router(), prefix="/api")
 fastapi_app.include_router(get_oauth_router(db), prefix="/api")
 fastapi_app.include_router(get_upload_router(db), prefix="/api")
 fastapi_app.include_router(adk_router)  # DigitalOcean ADK routes
+
+# Universal Omni-Agent Routes
+universal_router = create_universal_routes(db)
+fastapi_app.include_router(universal_router)
 
 # NEXUS Social Network Routes
 social_router = create_social_routes(db, get_current_user)
