@@ -61,6 +61,7 @@ class UniversalRouterService:
             "code_analysis": {"service": "devtools", "description": "Error tracking and CI/CD pipelines"},
             "code_editing": {"service": "editors", "description": "IDE and code editor tools"},
             "code_quality": {"service": "php_quality", "description": "PHP code quality analysis"},
+            "code_review": {"service": "code_review", "description": "Meta's semi-formal code review (93% accuracy)"},
             "github_tools": {"service": "github_infra", "description": "GitHub infrastructure tools"},
             "open_source": {"service": "opensource_tools", "description": "Open source automation tools"},
             "agent_sandbox": {"service": "aio_sandbox", "description": "All-in-one agent development sandbox"},
