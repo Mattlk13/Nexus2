@@ -5,7 +5,7 @@ import {
   Sparkles, Code, Box, Image, Video, Zap, Users, 
   Play, Loader2, CheckCircle, ArrowRight, Wand2
 } from 'lucide-react';
-import { BACKEND_URL } from '../App';
+import { BACKEND_URL } from '../config';
 
 // Use v2 API for Omma (self-registered routes)
 const OMMA_API = `${BACKEND_URL}/api/v2/hybrid/omma`;

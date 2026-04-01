@@ -11,7 +11,8 @@ import {
   Plus, User, Rocket, Crown, CheckCircle, Loader2, Settings, BarChart3,
   Edit, Trash2, ArrowLeft, Image as ImageIcon, ShoppingBag
 } from "lucide-react";
-import { useAuth, api, BoostModal, PurchaseModal, BACKEND_URL, API } from "../App";
+import { useAuth, api, BoostModal, PurchaseModal } from "../App";
+import { BACKEND_URL, API } from "../config";
 import { AuctionBiddingWidget } from "../components/AuctionBiddingWidget";
 
 // ==================== MARKETPLACE PAGE ====================

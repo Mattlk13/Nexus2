@@ -13,9 +13,10 @@ import {
   Home, Grid3X3, Image, ShoppingBag, Edit, Trash2, AlertCircle, ArrowLeft, Bell, Globe, Code
 } from "lucide-react";
 import { NotificationBell, VendorAnalyticsPage } from "./pages/VendorPages";
+import { BACKEND_URL, API } from "./config";
 
-export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-export const API = `${BACKEND_URL}/api`;
+// Re-export for backward compatibility
+export { BACKEND_URL, API };
 
 const queryClient = new QueryClient();
 

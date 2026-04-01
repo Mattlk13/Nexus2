@@ -8,7 +8,8 @@ import {
   Gavel, TrendingUp, Clock, Users, DollarSign, Zap,
   Loader2, CheckCircle, AlertCircle
 } from "lucide-react";
-import { useAuth, API, BACKEND_URL } from "../App";
+import { useAuth, API } from "../App";
+import { BACKEND_URL } from "../config";
 
 export const AuctionBiddingWidget = ({ product }) => {
   const { user, token } = useAuth();

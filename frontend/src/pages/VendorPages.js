@@ -10,7 +10,8 @@ import {
   ShoppingBag, Clock, ArrowUp, ArrowDown, Loader2, CheckCircle,
   X, ChevronRight, Users, Zap
 } from "lucide-react";
-import { useAuth, API, BACKEND_URL } from "../App";
+import { useAuth, API } from "../App";
+import { BACKEND_URL } from "../config";
 
 // ==================== WEBSOCKET HOOK ====================
 
