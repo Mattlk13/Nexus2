@@ -4,8 +4,6 @@ import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Send, Search, MoreVertical, Phone, Video, Paperclip } from 'lucide-react';
 
-const API_URL = process.env.REACT_APP_BACKEND_URL;
-
 const Messages = () => {
   const [conversations, setConversations] = useState([]);
   const [activeChat, setActiveChat] = useState(null);

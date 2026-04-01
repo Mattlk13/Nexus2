@@ -3,8 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Button } from '../components/ui/button';
 import { Users, DollarSign, TrendingUp, Activity, AlertCircle, CheckCircle } from 'lucide-react';
 
-const API_URL = process.env.REACT_APP_BACKEND_URL;
-
 const AdminDashboard = () => {
   const [stats, setStats] = useState({
     totalUsers: 0,
