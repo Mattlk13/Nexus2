@@ -115,6 +115,7 @@ const Navbar = () => {
     { path: "/discovery-hub", label: "Discovery", icon: TrendingUp },
     { path: "/agents", label: "AI Agents", icon: Bot },
     { path: "/universal-assistant", label: "Universal AI", icon: Sparkles },
+    { path: "/enterprise-ai", label: "Enterprise AI", icon: Globe },
     { path: "/agent-workspace", label: "Workspace", icon: Code },
   ];
 
@@ -864,6 +865,7 @@ import UniversalAssistant from "./pages/UniversalAssistant";
 import AgentWorkspace from "./pages/AgentWorkspace";
 import OmmaVideoGenerator from "./pages/OmmaVideoGenerator";
 import AutonomousDashboard from "./pages/AutonomousDashboard";
+import EnterpriseAI from "./pages/EnterpriseAI";
 
 // ==================== MAIN APP ====================
 
@@ -933,6 +935,7 @@ function App() {
               <Route path="/agent-workspace" element={<AgentWorkspace />} />
               <Route path="/omma-video" element={<OmmaVideoGenerator />} />
               <Route path="/autonomous" element={<AutonomousDashboard />} />
+              <Route path="/enterprise-ai" element={<EnterpriseAI />} />
             </Routes>
             <MessengerPopup />
             <AIChatWidget />
